@@ -1,15 +1,16 @@
 # LittleHood - Minimalist Archery Tracker
 
+**Your Simple Archery Mate**
+
 Beautiful activity rings for archers. Track daily arrows, build streaks, and improve your shooting with the minimalist archery app that just works.
 
 ![LittleHood App Icon](assets/app-icon.png)
 
 ## Features
 
-### 🎯 Activity Rings at a Glance
+### 🎯 Activity at a Glance
 - **Daily Arrows** - Track how many arrows you shoot each day
-- **Active Days** - See your weekly training consistency  
-- **Current Streak** - Build momentum with consecutive training days
+- **Active Days** - See your weekly training plan and build consistency  
 
 ### 📊 Quick & Easy Scoring
 - Tap colored buttons for instant score entry
