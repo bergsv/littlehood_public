@@ -31,9 +31,9 @@ Beautiful activity rings for archers. Track daily arrows, build streaks, and imp
 ## Support
 
 Having issues or suggestions? Please check our:
-- [FAQ](https://github.com/yourusername/littlehood_public/wiki/FAQ)
-- [Known Issues](https://github.com/yourusername/littlehood_public/issues)
-- [Feature Requests](https://github.com/yourusername/littlehood_public/issues/new?labels=enhancement)
+- [FAQ](https://github.com/bergsv/littlehood_public/wiki/FAQ)
+- [Known Issues](https://github.com/bergsv/littlehood_public/issues)
+- [Feature Requests](https://github.com/bergsv/littlehood_public/issues/new?labels=enhancement)
 
 ## Privacy
 
@@ -53,7 +53,7 @@ See our full [Privacy Policy](PRIVACY.md)
 
 ## Contact
 
-For support inquiries: [Create an issue](https://github.com/yourusername/littlehood_public/issues/new)
+For support inquiries: [Create an issue](https://github.com/bergsv/littlehood_public/issues/new)
 
 ---
 

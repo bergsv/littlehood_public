@@ -59,7 +59,7 @@ Any changes to this privacy policy will be reflected in app updates.
 ## Contact
 
 For privacy-related questions, please create an issue at:
-https://github.com/yourusername/littlehood_public/issues
+https://github.com/bergsv/littlehood_public/issues
 
 ---
 
