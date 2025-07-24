@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features & Roadmap - LittleHood</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            color: #1d1d1f;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            padding: 40px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #6e6e73;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: rgb(161, 193, 129);
+        }
+        
+        .content {
+            padding: 60px 0;
+        }
+        
+        h1 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #6e6e73;
+            margin-bottom: 60px;
+        }
+        
+        .issues-section {
+            background-color: #f5f5f7;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        
+        .new-issue-btn {
+            background-color: rgb(161, 193, 129);
+            color: #1d1d1f;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .new-issue-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: #fff;
+            border: 1px solid #e5e5e7;
+            color: #6e6e73;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            border-color: rgb(161, 193, 129);
+            color: rgb(161, 193, 129);
+        }
+        
+        .filter-btn.active {
+            background: rgb(161, 193, 129);
+            color: #1d1d1f;
+            border-color: rgb(161, 193, 129);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #86868b;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 10px;
+            border: 2px solid #86868b;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .issues-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .issue-item {
+            background: #fff;
+            border: 1px solid #e5e5e7;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .issue-item:hover {
+            border-color: rgb(161, 193, 129);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .issue-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .issue-title {
+            font-weight: 600;
+            color: #1d1d1f;
+            font-size: 16px;
+            flex: 1;
+        }
+        
+        .issue-number {
+            color: #86868b;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .issue-labels {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .label {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .issue-meta {
+            font-size: 13px;
+            color: #86868b;
+        }
+        
+        .error {
+            background: #fee;
+            color: #d00;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .no-issues {
+            text-align: center;
+            padding: 60px 20px;
+            color: #86868b;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 80px 20px 40px;
+            color: #6e6e73;
+            font-size: 13px;
+            border-top: 1px solid #f5f5f7;
+        }
+        
+        footer a {
+            color: #6e6e73;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        footer a:hover {
+            color: rgb(161, 193, 129);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">LittleHood</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <h1>Features & Roadmap</h1>
+            <p class="subtitle">Track our progress, report bugs, and suggest new features for LittleHood</p>
+            
+            <div class="issues-section">
+                <div class="section-header">
+                    <h2>Open Issues & Feature Requests</h2>
+                    <a href="#" class="new-issue-btn" id="newIssueBtn">
+                        <i class="fas fa-plus"></i>
+                        New Issue
+                    </a>
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="open">Open</button>
+                    <button class="filter-btn" data-filter="bug">Bugs</button>
+                    <button class="filter-btn" data-filter="enhancement">Features</button>
+                </div>
+                
+                <div id="issuesContainer">
+                    <div class="loading">Loading issues</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Sven Bergendahl | <a href="impressum.html">Impressum</a> | <a href="privacy.html">Privacy</a></p>
+    </footer>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            owner: 'bergsv',
+            repo: 'littlehood_public',
+            perPage: 30,
+            labels: ''
+        };
+
+        let allIssues = [];
+        let currentFilter = 'all';
+
+        // GitHub API URL
+        const apiUrl = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/issues?per_page=${CONFIG.perPage}&state=all`;
+
+        // New Issue URL
+        document.getElementById('newIssueBtn').href = `https://github.com/${CONFIG.owner}/${CONFIG.repo}/issues/new`;
+
+        // Filter Event Listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                displayIssues();
+            });
+        });
+
+        // Load Issues
+        async function loadIssues() {
+            try {
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const issues = await response.json();
+                allIssues = issues.filter(issue => !issue.pull_request); // Only issues, no PRs
+                displayIssues();
+                
+            } catch (error) {
+                console.error('Error loading issues:', error);
+                document.getElementById('issuesContainer').innerHTML = `
+                    <div class="error">
+                        Error loading issues. Please try again later.
+                    </div>
+                `;
+            }
+        }
+
+        // Display Issues
+        function displayIssues() {
+            const container = document.getElementById('issuesContainer');
+            
+            let filteredIssues = allIssues;
+            
+            // Apply filters
+            switch(currentFilter) {
+                case 'open':
+                    filteredIssues = allIssues.filter(issue => issue.state === 'open');
+                    break;
+                case 'bug':
+                    filteredIssues = allIssues.filter(issue => 
+                        issue.labels.some(label => label.name.toLowerCase().includes('bug'))
+                    );
+                    break;
+                case 'enhancement':
+                    filteredIssues = allIssues.filter(issue => 
+                        issue.labels.some(label => 
+                            label.name.toLowerCase().includes('enhancement') || 
+                            label.name.toLowerCase().includes('feature')
+                        )
+                    );
+                    break;
+            }
+            
+            if (filteredIssues.length === 0) {
+                container.innerHTML = '<div class="no-issues">No issues found.</div>';
+                return;
+            }
+            
+            const issuesHTML = filteredIssues.map(issue => {
+                const labels = issue.labels.map(label => `
+                    <span class="label" style="background-color: #${label.color}; color: ${getContrastColor(label.color)}">
+                        ${label.name}
+                    </span>
+                `).join('');
+                
+                const timeAgo = getTimeAgo(new Date(issue.created_at));
+                
+                return `
+                    <a href="${issue.html_url}" target="_blank" class="issue-item">
+                        <div class="issue-header">
+                            <span class="issue-title">${escapeHtml(issue.title)}</span>
+                            <span class="issue-number">#${issue.number}</span>
+                        </div>
+                        ${labels ? `<div class="issue-labels">${labels}</div>` : ''}
+                        <div class="issue-meta">
+                            Created ${timeAgo} by ${issue.user.login} • ${issue.comments} comment${issue.comments !== 1 ? 's' : ''}
+                        </div>
+                    </a>
+                `;
+            }).join('');
+            
+            container.innerHTML = `<div class="issues-list">${issuesHTML}</div>`;
+        }
+
+        // Helper Functions
+        function getContrastColor(hexcolor) {
+            const r = parseInt(hexcolor.substr(0,2), 16);
+            const g = parseInt(hexcolor.substr(2,2), 16);
+            const b = parseInt(hexcolor.substr(4,2), 16);
+            const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+            return brightness > 128 ? '#000000' : '#ffffff';
+        }
+
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            const intervals = {
+                year: 31536000,
+                month: 2592000,
+                week: 604800,
+                day: 86400,
+                hour: 3600,
+                minute: 60
+            };
+            
+            for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+                const interval = Math.floor(seconds / secondsInUnit);
+                if (interval >= 1) {
+                    return `${interval} ${unit}${interval > 1 ? 's' : ''} ago`;
+                }
+            }
+            return 'just now';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initial load
+        loadIssues();
+        
+        // Auto-refresh every 5 minutes
+        setInterval(loadIssues, 300000);
+    </script>
+</body>
+</html>
